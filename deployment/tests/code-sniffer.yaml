@@ -11,7 +11,7 @@ spec:
         spec:
             containers:
                 - name: tests
-                  image: spryker-image
+                  image: spryker-image-tasks
                   command:
                       - bash
                       - -c

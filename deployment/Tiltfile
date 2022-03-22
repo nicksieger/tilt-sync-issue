@@ -9,10 +9,28 @@ k8s_resource(
 )
 
 docker_build(
- 'spryker-image',
+ 'spryker-image-base',
  '..',
  target='spryker',
  dockerfile='Dockerfile',
+ live_update=[
+   sync('..', '/data'),
+ ],
+)
+
+docker_build(
+ 'spryker-image',
+ '..',
+ dockerfile_contents='FROM spryker-image-base',
+ live_update=[
+   sync('..', '/data'),
+ ],
+)
+
+docker_build(
+ 'spryker-image-tasks',
+ '..',
+ dockerfile_contents='FROM spryker-image-base',
  live_update=[
    sync('..', '/data'),
  ],
