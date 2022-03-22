@@ -1,0 +1,32 @@
+
+include('./tests/Tiltfile')
+
+k8s_yaml('application.yaml')
+k8s_resource(
+  'application',
+  labels=["Application"],
+  pod_readiness="wait",
+)
+
+docker_build(
+ 'spryker-image',
+ '..',
+ target='spryker',
+ dockerfile='Dockerfile',
+ live_update=[
+   sync('..', '/data'),
+ ],
+)
+
+docker_build(
+ 'nginx-image',
+ '..',
+ target='nginx-application',
+ dockerfile='Dockerfile',
+ live_update=[
+   sync('../public', '/data/public'),
+ ],
+ only=[
+    './public/',
+ ],
+)

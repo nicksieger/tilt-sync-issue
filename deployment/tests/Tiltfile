@@ -1,0 +1,7 @@
+
+k8s_yaml('code-sniffer.yaml')
+k8s_resource(
+  'code-sniffer',
+  labels=["QA"],
+  trigger_mode=TRIGGER_MODE_MANUAL,
+)

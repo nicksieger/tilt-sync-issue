@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+    name: code-sniffer
+spec:
+    backoffLimit: 0
+    template:
+        metadata:
+            labels:
+                app: code-sniffer
+        spec:
+            containers:
+                - name: tests
+                  image: spryker-image
+                  command:
+                      - bash
+                      - -c
+                      - |
+                          set -euo pipefail
+                          sleep 3
+            restartPolicy: Never

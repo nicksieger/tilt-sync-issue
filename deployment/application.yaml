@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: application
+spec:
+    selector:
+        matchLabels:
+            app: application
+    template:
+        metadata:
+            labels:
+                app: application
+        spec:
+            containers:
+                - name: nginx-application
+                  image: nginx-image
+                - name: spryker
+                  image: spryker-image
+                  command:
+                      - sh
+                      - -c
+                      - sleep 2000000
